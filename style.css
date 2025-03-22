@@ -7,8 +7,8 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #74ABE2, #5563DE);
-  color: #333;
+  background: linear-gradient(135deg, #232526, #414345);
+  color: #e0e0e0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,41 +22,44 @@ header {
 }
 
 .logo {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
   margin-bottom: 10px;
+  border: 2px solid #e0e0e0;
 }
 
 header h1 {
-  font-size: 1.8rem;
-  color: #fff;
+  font-size: 2rem;
+  color: #e0e0e0;
 }
 
 main {
   width: 100%;
   max-width: 500px;
-  background: #fff;
-  border-radius: 15px;
+  background: #1c1c1c;
+  border-radius: 20px;
   padding: 20px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.8);
 }
 
 .card {
-  background: #f9fafb;
-  border-radius: 10px;
+  background: #2a2a2a;
+  border-radius: 15px;
   padding: 15px;
   margin-bottom: 20px;
 }
 
-.card p {
-  margin: 10px 0;
+.card .info p {
+  margin: 8px 0;
   font-size: 1rem;
+  color: #ccc;
 }
 
 .controls {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
@@ -66,50 +69,58 @@ button {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:active {
+  transform: scale(0.98);
 }
 
 #toggleMotor {
-  background-color: #ef4444;
+  background-color: #ff6b6b;
   color: #fff;
 }
 
 #toggleMotor:hover {
-  background-color: #dc2626;
+  background-color: #ff4d4d;
 }
 
 .timer-control {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .timer-control label {
   font-weight: 600;
+  color: #e0e0e0;
 }
 
 .timer-control select,
 .timer-control input {
   padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ddd;
+  font-size: 0.9rem;
+  border: 1px solid #555;
   border-radius: 8px;
+  background: #333;
+  color: #e0e0e0;
 }
 
 .timer-control button {
-  background-color: #3b82f6;
+  background-color: #4d79ff;
   color: #fff;
-  padding: 10px 15px;
+  padding: 10px;
   border-radius: 8px;
-  transition: background-color 0.3s ease;
 }
 
 .timer-control button:hover {
-  background-color: #2563eb;
+  background-color: #3b66e0;
 }
 
 .device-status {
   text-align: center;
+  font-size: 1rem;
+  color: #e0e0e0;
 }
 
 .status-dot {
@@ -117,22 +128,28 @@ button {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  margin-left: 5px;
+  margin-left: 8px;
   vertical-align: middle;
+  animation: pulse 2s infinite;
 }
 
 .status-dot.green {
-  background-color: #10b981;
+  background-color: #28a745;
 }
 
 .status-dot.red {
-  background-color: #ef4444;
+  background-color: #dc3545;
 }
 
-/* Responsive adjustments */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
 @media (max-width: 500px) {
   header h1 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
   button, .timer-control select, .timer-control input {
     font-size: 0.9rem;

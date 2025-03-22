@@ -33,7 +33,7 @@ const statusIndicator = document.getElementById('statusIndicator');
 let currentCommand = "OFF";
 let timerMode = false;
 
-// Device status listener (green for online, red for offline)
+// Device status listener: expects "online" or "offline"
 onValue(ref(database, 'device_status'), (snapshot) => {
   const status = snapshot.val();
   if (status === "online") {
@@ -66,18 +66,17 @@ onValue(ref(database, 'motor_control/command'), (snapshot) => {
   currentCommand = command;
   if (command === "ON") {
     toggleMotorBtn.textContent = "Turn OFF Motor";
-    toggleMotorBtn.style.backgroundColor = "#ef4444";
+    toggleMotorBtn.style.backgroundColor = "#ff4d4d";
   } else {
     toggleMotorBtn.textContent = "Turn ON Motor";
     toggleMotorBtn.style.backgroundColor = "#10b981";
   }
 });
 
-// Listener for live time remaining
+// Live countdown timer listener
 onValue(ref(database, 'motor_control/time_remaining'), (snapshot) => {
   const remaining = snapshot.val();
-  if(remaining !== null){
-    // Convert seconds to mm:ss format
+  if (remaining !== null) {
     let seconds = parseInt(remaining);
     let minutes = Math.floor(seconds / 60);
     seconds = seconds % 60;
