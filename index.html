@@ -19,9 +19,25 @@
     <div class="controls">
       <button id="toggleMotor">Toggle Motor</button>
       <div class="timer-control">
-        <input type="number" id="timerInput" placeholder="Set timer (sec)" />
+        <label for="timerSelect">Timer (minutes):</label>
+        <select id="timerSelect">
+           <option value="1">1 minute</option>
+           <option value="2">2 minutes</option>
+           <option value="5">5 minutes</option>
+           <option value="10">10 minutes</option>
+           <option value="15" selected>15 minutes</option>
+           <option value="20">20 minutes</option>
+           <option value="25">25 minutes</option>
+           <option value="custom">Custom</option>
+        </select>
+        <input type="number" id="customTimer" placeholder="Custom minutes" style="display: none;" min="1" />
         <button id="setTimer">Set Timer</button>
+        <button id="toggleTimerMode">Timer Mode: OFF</button>
       </div>
+    </div>
+    
+    <div class="device-status">
+      <span>Device Status:</span> <span id="statusIndicator" class="status-dot red"></span>
     </div>
   </div>
   <script type="module" src="script.js"></script>

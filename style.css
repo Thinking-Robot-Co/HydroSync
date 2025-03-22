@@ -66,9 +66,16 @@ button {
 
 .timer-control {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
+  align-items: center;
 }
 
+.timer-control label {
+  flex-basis: 100%;
+}
+
+.timer-control select,
 .timer-control input {
   flex: 1;
   padding: 10px;
@@ -79,13 +86,34 @@ button {
 .timer-control button {
   background-color: #3b82f6;
   color: #fff;
-  border: none;
   padding: 10px 15px;
   border-radius: 8px;
-  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .timer-control button:hover {
   background-color: #2563eb;
+}
+
+/* Device status indicator styles */
+.device-status {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+.status-dot.green {
+  background-color: #10b981;
+}
+
+.status-dot.red {
+  background-color: #ef4444;
 }
