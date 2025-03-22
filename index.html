@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tank Monitor</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🚰 Tank Monitor</h1>
+    
+    <div class="card">
+      <p><strong>Water Level:</strong> <span id="waterLevel">--</span> cm</p>
+      <p><strong>Water Quality:</strong> <span id="waterQuality">--</span></p>
+      <p><strong>Motor Status:</strong> <span id="motorStatus">--</span></p>
+    </div>
+
+    <div class="controls">
+      <button id="toggleMotor">Toggle Motor</button>
+      <div class="timer-control">
+        <input type="number" id="timerInput" placeholder="Set timer (sec)" />
+        <button id="setTimer">Set Timer</button>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "water_level": 35,
+  "motor_control": {
+    "command": "ON",
+    "status": "ON"
+  }
+}
