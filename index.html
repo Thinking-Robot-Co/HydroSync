@@ -5,17 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tank Monitor</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <h1>🚰 Tank Monitor</h1>
-    
+  <header>
+    <img src="logo.png" alt="Logo" class="logo">
+    <h1>Tank Monitor</h1>
+  </header>
+  <main>
     <div class="card">
-      <p><strong>Water Level:</strong> <span id="waterLevel">--</span> cm</p>
-      <p><strong>Water Quality:</strong> <span id="waterQuality">--</span></p>
-      <p><strong>Motor Status:</strong> <span id="motorStatus">--</span></p>
+      <div class="info">
+        <p><strong>Water Level:</strong> <span id="waterLevel">--</span> cm</p>
+        <p><strong>Water Quality:</strong> <span id="waterQuality">--</span></p>
+        <p><strong>Motor Status:</strong> <span id="motorStatus">--</span></p>
+        <p><strong>Time Remaining:</strong> <span id="timeRemaining">--</span></p>
+      </div>
     </div>
-
     <div class="controls">
       <button id="toggleMotor">Toggle Motor</button>
       <div class="timer-control">
@@ -35,11 +42,10 @@
         <button id="toggleTimerMode">Timer Mode: OFF</button>
       </div>
     </div>
-    
     <div class="device-status">
       <span>Device Status:</span> <span id="statusIndicator" class="status-dot red"></span>
     </div>
-  </div>
+  </main>
   <script type="module" src="script.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-// Import Firebase modules
+// script.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
 import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-database.js";
 
@@ -22,6 +22,7 @@ const database = getDatabase(app);
 const waterLevelEl = document.getElementById('waterLevel');
 const waterQualityEl = document.getElementById('waterQuality');
 const motorStatusEl = document.getElementById('motorStatus');
+const timeRemainingEl = document.getElementById('timeRemaining');
 const toggleMotorBtn = document.getElementById('toggleMotor');
 const timerSelect = document.getElementById('timerSelect');
 const customTimerInput = document.getElementById('customTimer');
@@ -32,10 +33,9 @@ const statusIndicator = document.getElementById('statusIndicator');
 let currentCommand = "OFF";
 let timerMode = false;
 
-// --- Device Status Listener ---
+// Device status listener (green for online, red for offline)
 onValue(ref(database, 'device_status'), (snapshot) => {
   const status = snapshot.val();
-  // Assume "online" means connected; otherwise, treat as offline.
   if (status === "online") {
     statusIndicator.classList.remove("red");
     statusIndicator.classList.add("green");
@@ -45,7 +45,7 @@ onValue(ref(database, 'device_status'), (snapshot) => {
   }
 });
 
-// --- Data Listeners ---
+// Data listeners
 onValue(ref(database, 'water_level'), (snapshot) => {
   const level = snapshot.val();
   waterLevelEl.textContent = level !== null ? level : "--";
@@ -73,11 +73,23 @@ onValue(ref(database, 'motor_control/command'), (snapshot) => {
   }
 });
 
-// --- Timer Mode & Timer Value Listeners ---
-// (These fields will be set via the buttons below)
- 
-// --- UI Event Listeners ---
-// Show/hide custom input when "Custom" is selected
+// Listener for live time remaining
+onValue(ref(database, 'motor_control/time_remaining'), (snapshot) => {
+  const remaining = snapshot.val();
+  if(remaining !== null){
+    // Convert seconds to mm:ss format
+    let seconds = parseInt(remaining);
+    let minutes = Math.floor(seconds / 60);
+    seconds = seconds % 60;
+    timeRemainingEl.textContent = `${minutes}m ${seconds}s`;
+  } else {
+    timeRemainingEl.textContent = "--";
+  }
+});
+
+// UI Event Listeners
+
+// Show/hide custom timer input when "Custom" is selected
 timerSelect.addEventListener('change', () => {
   if (timerSelect.value === "custom") {
     customTimerInput.style.display = "block";
@@ -86,7 +98,7 @@ timerSelect.addEventListener('change', () => {
   }
 });
 
-// Set Timer button: update Firebase with the selected timer (in seconds)
+// Set Timer button: update Firebase with selected timer (in seconds)
 setTimerBtn.addEventListener('click', () => {
   let timerValue;
   if (timerSelect.value === "custom") {
@@ -98,7 +110,6 @@ setTimerBtn.addEventListener('click', () => {
   } else {
     timerValue = parseInt(timerSelect.value);
   }
-  // Convert minutes to seconds
   const timerSeconds = timerValue * 60;
   set(ref(database, 'motor_control/timer'), timerSeconds)
     .then(() => {
@@ -109,7 +120,7 @@ setTimerBtn.addEventListener('click', () => {
     });
 });
 
-// Timer Mode toggle button: update Firebase and UI accordingly
+// Toggle Timer Mode button: update Firebase and UI
 toggleTimerModeBtn.addEventListener('click', () => {
   timerMode = !timerMode;
   const modeText = timerMode ? "ON" : "OFF";
